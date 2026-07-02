@@ -3,522 +3,266 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pokémon 30th ANNIVERSARY - 抽賞大廳</title>
+    <title>Pokémon 30th ANNIVERSARY - 商品詳情</title>
+    <link rel="stylesheet" href="style.css" />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      .light-theme {
+        height: 100vh;
+        background-color: #f4f4f4;
       }
-
-      body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
-          sans-serif;
-        background-color: #1a1a1a;
-        color: #fff;
-        max-width: 480px;
-        margin: 0 auto;
-      }
-
-      .status-bar {
-        background-color: #f5f5f5;
-        color: #000;
-        padding: 8px 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      .status-left {
-        font-weight: bold;
-      }
-
-      .status-right {
-        display: flex;
-        gap: 4px;
-        align-items: center;
-      }
-
-      .status-icons {
-        display: flex;
-        gap: 2px;
-        font-size: 12px;
-      }
-
-      .header {
-        background: #66f4b9;
-        padding: 12px 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .header-left {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 18px;
-        font-weight: bold;
-        color: #043522;
-      }
-
-      .header-back {
-        cursor: pointer;
-        font-size: 24px;
-        width: 24px;
-        height: 24px;
-      }
-
-      .header-right {
-        font-weight: bold;
-        color: #333;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .header-right-pointes {
-        background-color: #e5fff4;
-        border-radius: 20px;
-        padding: 8px 10px;
-        display: flex;
-        gap: 4px;
-        align-items: center;
-      }
-
-      .header-right img {
-        width: 22px;
-        height: 22px;
-      }
-
-      .header-right span {
-        font-size: 11px;
-        align-self: flex-end;
-      }
-
-      .container {
-        max-width: 100%;
-        padding: 0;
-      }
-
-      .banner-section {
-        background: url("images/banner.png") center/cover no-repeat;
-        padding: 16px;
-        text-align: center;
+      .product-image {
         width: 100%;
-        height: 130px;
+        height: auto;
       }
 
-      .banner-title {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 8px;
-        color: #fff;
-      }
-
-      .banner-subtitle {
-        font-size: 12px;
-        color: #999;
-      }
-
-      .hot-label {
-        display: inline-block;
-        background-color: #ffc107;
-        color: #000;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 10px;
-        font-weight: bold;
-        margin-bottom: 12px;
-      }
-
-      .prize-list-section {
-        background-color: #000;
-        padding: 16px;
-      }
-
-      .section-title {
-        font-size: 16px;
-        margin-bottom: 12px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-left: 2px solid #fff;
-        padding: 4px 6px;
-      }
-
-      .prize-count {
-        background-color: #ffe5ef;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        color: #180c88;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .prize-count::before {
-        content: "";
-        width: 8px;
-        height: 8px;
-        background-color: #c8548c;
-        border-radius: 50%;
-        display: inline-block;
-      }
-
-      .prize-items {
-        display: flex;
-        gap: 12px;
-        overflow-x: auto;
-      }
-
-      .prize-item {
-        width: calc(20% - 9.6px);
-        aspect-ratio: 1/1;
-        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 40px;
-        flex-shrink: 0;
-        cursor: pointer;
-        transition: transform 0.2s;
-        overflow: hidden;
-      }
-      .prize-item img {
+      .product-image img {
         width: 100%;
+        height: auto;
+        display: block;
       }
 
-      .prize-item:hover {
-        transform: scale(1.05);
-      }
-
-      .prize-item:last-child {
-        background-color: #e8f5e9;
-        color: #078b59;
-        font-size: 24px;
-        font-weight: bold;
-      }
-
-      .pool-section {
-        background-color: #000;
-        padding: 16px;
-      }
-
-      .pool-title {
-        font-size: 16px;
-        margin-bottom: 4px;
-        border-left: 2px solid #fff;
-        padding: 4px 6px;
-      }
-
-      .pool-grid {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 16px;
-        justify-content: space-between;
-      }
-
-      .pool-item {
-        background: url("images/lottery.png") center/contain no-repeat;
-        padding: 6px;
-        text-align: center;
-        font-size: clamp(6px, calc(6px + 1.2vw), 14px);
-        cursor: pointer;
-        transition: transform 0.2s;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        width: calc(20% - 6.4px);
-        min-height: 60px;
-        position: relative;
-        color: #000;
-        white-space: nowrap;
-        gap: 4px;
-      }
-
-      .pool-item:hover {
-        transform: scale(1.05);
-      }
-
-      .pool-item.rare {
-        background: url("images/lottery.png") center/contain no-repeat;
-      }
-
-      .gem-icon {
-        width: 16px;
-        height: 16px;
-        display: inline-block;
-        position: static;
-        margin: 0;
-      }
-
-      .action-section {
-        display: flex;
-        gap: 16px;
-        padding: 0 16px;
-        margin: 16px 0;
-      }
-
-      .delete-draws-section {
-        background: #b0a7fb;
-        padding: 12px 16px;
-        margin: 0;
-        border-radius: 6px;
-        text-align: center;
-        flex: 1;
-      }
-
-      .delete-draws-label {
-        font-size: 14px;
-        margin-bottom: 2px;
-      }
-
-      .delete-draws-count {
+      .product-title {
         font-size: 20px;
         font-weight: bold;
+        color: #fff;
+        text-align: center;
       }
 
-      .action-button {
-        background: url("images/waiting.png") center / 100% 100% no-repeat;
+      .product-content {
+        background-color: #f4f4f4;
         padding: 16px;
-        margin: 0;
+      }
+
+      .status-buttons {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .status-btn {
+        flex: 1;
+        padding: 12px;
+        border-radius: 6px;
         text-align: center;
         cursor: pointer;
+        font-size: 12px;
         transition: transform 0.2s;
-        flex: 2;
       }
 
-      .action-button:hover {
+      .status-btn:hover {
         transform: scale(1.02);
       }
 
-      .action-button-main {
+      .status-btn.active {
+        background-color: #180d88;
+        color: #fff;
+      }
+
+      .status-btn.secondary {
+        background-color: #ffe900;
+        color: #01a94d;
+      }
+
+      .status-btn.tertiary {
+        background-color: #01a94d;
+        color: #ffe900;
+      }
+
+      .status-value {
         font-size: 18px;
+        margin-top: 4px;
         font-weight: bold;
-        color: #333;
-        margin-bottom: 2px;
       }
 
-      .action-button-sub {
-        font-size: 12px;
-        color: #666;
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+        margin-bottom: 12px;
+        font-weight: bold;
+        color: #01a94d;
+        padding: 0 8px;
       }
 
-      .notification-section {
-        background: #005c36;
-        color: #a6fcd8;
-        padding: 12px 12px;
-        margin: 16px;
-        border-radius: 12px;
+      .section-title-left {
         display: flex;
         align-items: center;
         gap: 8px;
-        font-size: 14px;
       }
 
-      .notification-icon {
-        font-size: 20px;
-        width: 22px;
-        height: 22px;
+      .section-title-left::before {
+        content: "";
+        width: 2px;
+        height: 20px;
+        background-color: #01a94d;
       }
 
-      .notification-text {
-        flex: 1;
-      }
-
-      .notification-sound {
-        font-size: 18px;
+      .section-title-right {
+        font-size: 12px;
+        color: #01a94d;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 4px;
       }
 
-      @media (max-width: 480px) {
-        .pool-grid {
-          grid-template-columns: repeat(5, 1fr);
-        }
+      .prize-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .prize-card {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        padding: 0;
+        cursor: pointer;
+        overflow: hidden;
+      }
+
+      .prize-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .prize-card:hover {
+        transform: scale(1.02);
+      }
+
+      .prize-card-name {
+        font-size: 12px;
+        margin-bottom: 4px;
+        font-weight: bold;
+      }
+
+      .prize-progress {
+        background: #444;
+        height: 4px;
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 4px;
+      }
+
+      .prize-progress-bar {
+        background: #66f4b9;
+        height: 100%;
+        width: 100%;
+      }
+
+      .prize-progress-text {
+        font-size: 11px;
+        color: #999;
       }
     </style>
   </head>
-  <body>
+  <body class="light-theme">
     <!-- 頭部 -->
-    <div class="header">
+    <div class="header header-v1">
       <div class="header-left">
-        <img src="images/arrow.png" class="header-back" alt="back" />
-        <span>抽賞大廳</span>
+        <img
+          src="images/components/icons/arrow-v2.png"
+          class="header-back"
+          alt="back"
+          onclick="history.back()"
+        />
+        <span>抽賞內容</span>
       </div>
       <div class="header-right">
         <div class="header-right-pointes">
-          <img src="images/money.png" alt="money" /> 1,000 <span>PTS</span>
+          <img src="images/components/icons/money.png" alt="money" /> 1,000 <span>PTS</span>
         </div>
-        <img src="images/message.png" class="header-message" alt="message" />
+        <img src="images/components/icons/message-v2.png" class="header-message" alt="message" />
       </div>
     </div>
 
     <!-- 主容器 -->
     <div class="container">
-      <!-- 橫幅部分 -->
-      <div class="banner-section"></div>
+      <!-- 商品圖片 -->
+      <div class="product-image">
+        <img src="images/pages/banner-v2.png" alt="product banner" />
+      </div>
 
-      <!-- 賞品列表 -->
-      <div class="prize-list-section">
+      <!-- 內容區域 -->
+      <div class="product-content">
+        <!-- 狀態按鈕 -->
+        <div class="status-buttons">
+          <div class="status-btn active">
+            剩餘抽數
+            <div class="status-value">80 pts</div>
+          </div>
+          <div class="status-btn secondary">
+            單次抽賞
+            <div class="status-value">40 pts</div>
+          </div>
+          <div class="status-btn tertiary">
+            當前狀態
+            <div class="status-value">販售中</div>
+          </div>
+        </div>
+
+        <!-- 賞品清單 -->
         <div class="section-title">
-          <span>賞品列表</span>
-          <span class="prize-count">在線人數：50</span>
+          <div class="section-title-left">賞品清單</div>
+          <div class="section-title-right">
+            剩餘數量由多到少排序 <span>▼</span>
+          </div>
         </div>
-        <div class="prize-items">
-          <div class="prize-item">
-            <img src="images/product-1.png" alt="product 1" />
-          </div>
-          <div class="prize-item">
-            <img src="images/product-2.png" alt="product 2" />
-          </div>
-          <div class="prize-item">
-            <img src="images/product-3.png" alt="product 3" />
-          </div>
-          <div class="prize-item">
-            <img src="images/product-4.png" alt="product 4" />
-          </div>
-          <div class="prize-item">+7</div>
-        </div>
-      </div>
-
-      <!-- 賞籤池 -->
-      <div class="pool-section">
-        <div class="pool-title">賞籤池</div>
-        <div class="pool-grid">
-          <div class="pool-item">
-            賞籤 01 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 02 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 03 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 04 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 05 <img src="images/gem.png" class="gem-icon" alt="gem" />
+        <div class="prize-grid">
+          <div class="prize-card" onclick="goToLotteryDetails()">
+            <img src="images/prizes/ticket-card-1.png" alt="prize 1" />
           </div>
 
-          <div class="pool-item">
-            賞籤 06 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 07 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 08 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 09 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 10
-            <img src="images/gem.png" class="gem-icon" alt="gem" />
+          <div class="prize-card" onclick="goToLotteryDetails()">
+            <img src="images/prizes/ticket-card-2.png" alt="prize 2" />
           </div>
 
-          <div class="pool-item">
-            賞籤 11 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 12 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 13 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 14 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 15 <img src="images/gem.png" class="gem-icon" alt="gem" />
+          <div class="prize-card" onclick="goToLotteryDetails()">
+            <img src="images/prizes/ticket-card-3.png" alt="prize 3" />
           </div>
 
-          <div class="pool-item">
-            賞籤 16 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 17 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 18 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 19 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 20 <img src="images/gem.png" class="gem-icon" alt="gem" />
+          <div class="prize-card" onclick="goToLotteryDetails()">
+            <img src="images/prizes/ticket-card-4.png" alt="prize 4" />
           </div>
 
-          <div class="pool-item">
-            賞籤 21 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 22 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 23 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 24 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item">
-            賞籤 25 <img src="images/gem.png" class="gem-icon" alt="gem" />
+          <div class="prize-card" onclick="goToLotteryDetails()">
+            <img src="images/prizes/ticket-card-5.png" alt="prize 5" />
           </div>
 
-          <div class="pool-item rare">
-            賞籤 26 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item rare">
-            賞籤 27 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item rare">
-            賞籤 28 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item rare">
-            賞籤 29 <img src="images/gem.png" class="gem-icon" alt="gem" />
-          </div>
-          <div class="pool-item rare">
-            賞籤 30 <img src="images/gem.png" class="gem-icon" alt="gem" />
+          <div class="prize-card" onclick="goToLotteryDetails()">
+            <img src="images/prizes/ticket-card-6.png" alt="prize 6" />
           </div>
         </div>
       </div>
 
-      <!-- 剩餘抽數和行動按鈕 -->
-      <div class="action-section">
-        <!-- 剩餘抽數 -->
-        <div class="delete-draws-section">
-          <div class="delete-draws-label">剩餘抽數</div>
-          <div class="delete-draws-count">80 / 80</div>
-        </div>
-
-        <!-- 行動按鈕 -->
-        <div class="action-button">
-          <div class="action-button-main">我要排隊等抽</div>
-          <div class="action-button-sub">預計等待：120 秒</div>
-        </div>
-      </div>
-
-      <!-- 通知區 -->
-      <div class="notification-section">
-        <img
-          src="images/announcement.png"
-          class="notification-icon"
-          alt="announcement"
-        />
-        <div class="notification-text">
-          har****953 準備開抽 HUNTER✕HUNTER 揍敵客家族
-        </div>
-      </div>
-
-      <!-- 底部空間 -->
-      <div style="height: 20px"></div>
+      <div class="bottom-space"></div>
     </div>
+
+    <!-- 底部導航 -->
+    <div class="footer-nav">
+      <div class="nav-item active">
+        <img src="images/components/icons/home.png" alt="home" class="nav-icon" />
+        <div>首頁</div>
+      </div>
+      <div class="nav-item">
+        <img src="images/components/icons/compass.png" alt="compass" class="nav-icon" />
+        <div>探索</div>
+      </div>
+      <div class="nav-item">
+        <img src="images/components/icons/box.png" alt="box" class="nav-icon" />
+        <div>出貨</div>
+      </div>
+      <div class="nav-item">
+        <img src="images/components/icons/user.png" alt="user" class="nav-icon" />
+        <div>帳戶</div>
+      </div>
+    </div>
+
+    <script>
+      function goToLotteryDetails() {
+        window.location.href = "lottery-details.html";
+      }
+    </script>
   </body>
 </html>

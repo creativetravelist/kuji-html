@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon 30th ANNIVERSARY - 商品詳情</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+          sans-serif;
+        background-color: #1a1a1a;
+        color: #fff;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .status-bar {
+        background-color: #f5f5f5;
+        color: #000;
+        padding: 8px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .status-left {
+        font-weight: bold;
+      }
+
+      .status-right {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+
+      .status-icons {
+        display: flex;
+        gap: 2px;
+        font-size: 12px;
+      }
+
+      .header {
+        background: #66f4b9;
+        padding: 12px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #043522;
+      }
+
+      .header-back {
+        cursor: pointer;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+
+      .header-right {
+        font-weight: bold;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .header-right-pointes {
+        background-color: #e5fff4;
+        border-radius: 20px;
+        padding: 8px 10px;
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+
+      .header-right img {
+        width: 22px;
+        height: 22px;
+      }
+
+      .header-right span {
+        font-size: 11px;
+        align-self: flex-end;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .product-image {
+        background: url("images/banner.png") center/cover no-repeat;
+        width: 100%;
+        height: 200px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 16px;
+      }
+
+      .product-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+      }
+
+      .product-content {
+        background-color: #000;
+        padding: 16px;
+      }
+
+      .status-buttons {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .status-btn {
+        flex: 1;
+        padding: 12px;
+        border-radius: 6px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 12px;
+        transition: transform 0.2s;
+      }
+
+      .status-btn:hover {
+        transform: scale(1.02);
+      }
+
+      .status-btn.active {
+        background-color: #5b4f99;
+        color: #fff;
+      }
+
+      .status-btn.secondary {
+        background-color: #ffc107;
+        color: #000;
+        font-weight: bold;
+      }
+
+      .status-btn.tertiary {
+        background-color: #66f4b9;
+        color: #043522;
+        font-weight: bold;
+      }
+
+      .section-title {
+        font-size: 14px;
+        margin-bottom: 12px;
+        font-weight: bold;
+        border-left: 2px solid #fff;
+        padding-left: 8px;
+      }
+
+      .prize-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .prize-card {
+        background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        border-radius: 8px;
+        padding: 12px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        border: 1px solid #444;
+      }
+
+      .prize-card:hover {
+        transform: scale(1.02);
+      }
+
+      .prize-card-image {
+        width: 100%;
+        aspect-ratio: 1/1;
+        background: #333;
+        border-radius: 6px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+      }
+
+      .prize-card-name {
+        font-size: 12px;
+        margin-bottom: 4px;
+        font-weight: bold;
+      }
+
+      .prize-progress {
+        background: #444;
+        height: 4px;
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 4px;
+      }
+
+      .prize-progress-bar {
+        background: #66f4b9;
+        height: 100%;
+        width: 100%;
+      }
+
+      .prize-progress-text {
+        font-size: 11px;
+        color: #999;
+      }
+
+      .enter-button {
+        background: #66f4b9;
+        color: #043522;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        transition: transform 0.2s;
+      }
+
+      .enter-button:hover {
+        transform: scale(1.02);
+      }
+
+      .footer-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 12px;
+        background-color: #fff;
+        margin-top: 20px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        max-width: 480px;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        gap: 4px;
+        color: #666;
+        font-size: 12px;
+      }
+
+      .nav-item.active {
+        color: #66f4b9;
+      }
+
+      .nav-icon {
+        font-size: 20px;
+      }
+
+      .bottom-space {
+        height: 80px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 頭部 -->
+    <div class="header">
+      <div class="header-left">
+        <span class="header-back">←</span>
+        <span>抽賞內容</span>
+      </div>
+      <div class="header-right">
+        <div class="header-right-pointes">
+          <span>🪙</span> 1,000 <span>PTS</span>
+        </div>
+        <span>💬</span>
+      </div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="container">
+      <!-- 商品圖片 -->
+      <div class="product-image">
+        <div class="product-title">Pokémon 30th ANNIVERSARY vol.1</div>
+      </div>
+
+      <!-- 內容區域 -->
+      <div class="product-content">
+        <!-- 狀態按鈕 -->
+        <div class="status-buttons">
+          <div class="status-btn active">參加中<br />80 pts</div>
+          <div class="status-btn secondary">本週榜<br />40 pts</div>
+          <div class="status-btn tertiary">指標中</div>
+        </div>
+
+        <!-- 賞品清單 -->
+        <div class="section-title">賞品清單</div>
+        <div class="prize-grid">
+          <div class="prize-card" onclick="goToLotteryDetails()">
+            <div class="prize-card-image">🎁</div>
+            <div class="prize-card-name">3D視覺化寶可夢卡冊</div>
+            <div class="prize-progress">
+              <div class="prize-progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="prize-progress-text">剩餘 7 / 7</div>
+          </div>
+
+          <div class="prize-card">
+            <div class="prize-card-image">🎁</div>
+            <div class="prize-card-name">皮卡丘30周年紀念碟片</div>
+            <div class="prize-progress">
+              <div class="prize-progress-bar" style="width: 100%"></div>
+            </div>
+            <div class="prize-progress-text">剩餘 7 / 7</div>
+          </div>
+
+          <div class="prize-card">
+            <div class="prize-card-image">🎁</div>
+            <div class="prize-card-name">區域限定寶可夢公仔</div>
+            <div class="prize-progress">
+              <div class="prize-progress-bar" style="width: 50%"></div>
+            </div>
+            <div class="prize-progress-text">剩餘 8 / 3</div>
+          </div>
+
+          <div class="prize-card">
+            <div class="prize-card-image">🎁</div>
+            <div class="prize-card-name">皮卡丘30周年T恤</div>
+            <div class="prize-progress">
+              <div class="prize-progress-bar" style="width: 50%"></div>
+            </div>
+            <div class="prize-progress-text">剩餘 8 / 3</div>
+          </div>
+        </div>
+
+        <!-- 進入按鈕 -->
+        <button class="enter-button" onclick="goToLotteryDetails()">
+          進入賞籤
+        </button>
+      </div>
+
+      <div class="bottom-space"></div>
+    </div>
+
+    <!-- 底部導航 -->
+    <div class="footer-nav">
+      <div class="nav-item active">
+        <div class="nav-icon">🏠</div>
+        <div>首頁</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">📰</div>
+        <div>新聞</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">📦</div>
+        <div>山頂</div>
+      </div>
+      <div class="nav-item">
+        <div class="nav-icon">👤</div>
+        <div>個人</div>
+      </div>
+    </div>
+
+    <script>
+      function goToLotteryDetails() {
+        window.location.href = "lottery-details.html";
+      }
+    </script>
+  </body>
+</html>
